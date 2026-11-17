@@ -1,0 +1,32 @@
+# Frontend
+**/node_modules/
+**/dist/
+**/build/
+
+# Backend
+**/target/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+**/application.properties
+*.pem
+*.key
+*.p12
+*.jks
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Backups
+/trenix-backup-*/
+
+# Backup files
+**/*.backup-*

@@ -1,0 +1,377 @@
+/* =========================================================
+   TRENIX — LUXURY EDITORIAL LAYER (loaded after App.css)
+   Champagne gold · ivory · serif display · hairlines · slow motion
+   ========================================================= */
+
+@font-face { font-family: "Cormorant Garamond"; font-weight: 300; font-style: normal; font-display: swap; src: url("/fonts/cormorant-garamond-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 300; font-style: italic; font-display: swap; src: url("/fonts/cormorant-garamond-latin-300-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: normal; font-display: swap; src: url("/fonts/cormorant-garamond-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 400; font-style: italic; font-display: swap; src: url("/fonts/cormorant-garamond-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: normal; font-display: swap; src: url("/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 500; font-style: italic; font-display: swap; src: url("/fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-style: normal; font-display: swap; src: url("/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-weight: 600; font-style: italic; font-display: swap; src: url("/fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); }
+@font-face { font-family: "DM Sans"; font-weight: 400; font-display: swap; src: url("/fonts/dm-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "DM Sans"; font-weight: 500; font-display: swap; src: url("/fonts/dm-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "DM Sans"; font-weight: 700; font-display: swap; src: url("/fonts/dm-sans-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  --tnx-bg: #0a0908;
+  --tnx-panel: #120f0c;
+  --tnx-white: #f1ebe0;
+  --tnx-muted: #a39a8b;
+  --tnx-lime: #c9a96e;            /* accent (name kept for compatibility) */
+  --gold: #c9a96e;
+  --gold-soft: rgba(201, 169, 110, 0.14);
+  --hair: rgba(201, 169, 110, 0.28);
+  --hair-soft: rgba(241, 235, 224, 0.1);
+  --ivory: #ece5d6;
+  --ink: #14110c;
+  --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --tnx-display: var(--serif);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tnx-app { background: var(--tnx-bg); position: relative; }
+body { background: #0a0908 !important; }
+::selection { background: var(--gold); color: var(--ink); }
+::-webkit-scrollbar-track { background: #0a0908; }
+::-webkit-scrollbar-thumb { background: #3a3126; border-color: #0a0908; }
+
+/* ---------- Atmosphere ---------- */
+.tnx-app::before {
+  content: ""; position: fixed; inset: -50%; z-index: 9000; pointer-events: none; opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 1.2s steps(6) infinite;
+}
+@keyframes grain { 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } }
+
+.tnx-hero-background {
+  background:
+    radial-gradient(55% 55% at 75% 50%, rgba(201, 169, 110, 0.14), transparent 70%),
+    radial-gradient(40% 40% at 5% 100%, rgba(201, 169, 110, 0.06), transparent 70%) !important;
+  animation: aurora 16s ease-in-out infinite alternate;
+}
+@keyframes aurora { from { transform: scale(1); opacity: 0.8; } to { transform: translate3d(-2%, 2%, 0) scale(1.12); opacity: 1; } }
+
+/* ---------- Preloader / progress / cursor ---------- */
+.tnx-preloader { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: #0a0908;
+  animation: pre-out 1s var(--ease) 1.7s forwards; }
+.tnx-preloader b { font-family: var(--serif); font-weight: 300; font-size: clamp(44px, 9vw, 120px); letter-spacing: 0.32em; padding-left: 0.32em;
+  color: var(--tnx-white); clip-path: inset(0 100% 0 0); animation: wipe 1.2s var(--ease) 0.2s forwards; }
+.tnx-preloader b span { color: var(--gold); }
+.tnx-preloader i { position: absolute; left: 50%; bottom: 18vh; height: 1px; width: min(260px, 50vw); background: var(--gold);
+  transform: translateX(-50%) scaleX(0); transform-origin: left; animation: bar 1.5s var(--ease) 0.1s forwards; }
+@keyframes wipe { to { clip-path: inset(0 0 0 0); } }
+@keyframes bar { to { transform: translateX(-50%) scaleX(1); } }
+@keyframes pre-out { to { transform: translateY(-100%); visibility: hidden; } }
+
+.tnx-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 9500; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+.tnx-cursor { position: fixed; top: 0; left: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; z-index: 9400; pointer-events: none;
+  border: 1px solid var(--gold); border-radius: 50%; opacity: 0; transition: opacity 0.4s, width 0.4s var(--ease), height 0.4s var(--ease), margin 0.4s var(--ease), background 0.4s; will-change: transform; }
+.tnx-cursor.is-on { opacity: 0.85; }
+.tnx-cursor.is-hover { width: 84px; height: 84px; margin: -42px 0 0 -42px; background: var(--gold-soft); }
+.tnx-header, main, .tnx-footer { position: relative; z-index: 2; }
+.tnx-header { z-index: 100; }
+
+/* ---------- Announcement + header ---------- */
+.tnx-announcement { background: var(--gold); color: var(--ink); font-size: 9px; letter-spacing: 3px; font-weight: 700; }
+.tnx-header { background: rgba(10, 9, 8, 0.55) !important; border-bottom: 1px solid var(--hair-soft); transition: height 0.6s var(--ease), background 0.4s; }
+.tnx-header.is-scrolled { height: 66px; background: rgba(10, 9, 8, 0.88) !important; }
+.tnx-logo { font-family: var(--serif) !important; font-weight: 500 !important; font-size: 30px !important; letter-spacing: 0.34em !important; padding-left: 0.2em; }
+.tnx-logo span { color: var(--gold); }
+.tnx-nav a, .tnx-header-link, .tnx-search-trigger { font-size: 10px !important; letter-spacing: 3px !important; font-weight: 500 !important; color: #c9c0b0; }
+.tnx-nav a:hover, .tnx-header-link:hover, .tnx-search-trigger:hover { color: var(--gold); }
+.tnx-account-button, .tnx-bag-button, .tnx-header-link { font-size: 10px; letter-spacing: 3px; }
+.tnx-bag-button { border-color: var(--hair) !important; transition: background 0.4s, color 0.4s; }
+.tnx-bag-button:hover { background: var(--gold-soft); }
+.tnx-bag-button span { background: var(--gold) !important; color: var(--ink) !important; }
+
+/* ---------- Typography system ---------- */
+.tnx-hero h1, .tnx-section-heading h2, .tnx-shop-heading h2, .tnx-story-title h2, .tnx-final-cta h2, .tnx-manifest p {
+  font-family: var(--serif) !important; font-weight: 300 !important; letter-spacing: -0.02em !important; text-transform: none !important;
+}
+.tnx-section-heading h2 span, .tnx-shop-heading h2 span, .tnx-story-title h2 span { font-style: italic; color: var(--gold) !important; font-weight: 300; }
+.tnx-section-heading h2, .tnx-shop-heading h2, .tnx-story-title h2 { font-size: clamp(52px, 6.4vw, 104px) !important; line-height: 0.96 !important; }
+.tnx-eyebrow { font-size: 10px !important; letter-spacing: 4px !important; font-weight: 500 !important; color: var(--gold); }
+.tnx-eyebrow i { background: var(--gold) !important; width: 38px !important; }
+
+/* ---------- Hero ---------- */
+.tnx-hero { isolation: isolate; }
+.tnx-hero h1 { font-size: clamp(66px, 8.8vw, 140px) !important; line-height: 0.9 !important; }
+.tnx-hero h1 span, .tnx-hero h1 em, .tnx-hero h1 b { display: inline-block; font-weight: 300; animation: rise 1.4s var(--ease) both; }
+.tnx-hero h1 span { font-style: italic; animation-delay: 1.9s;
+  background: linear-gradient(100deg, #b08d4f 20%, #f3e2b8 48%, #b08d4f 75%); background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  animation: rise 1.4s var(--ease) 1.9s both, sweep 7s linear 3.4s infinite; }
+.tnx-hero h1 em { font-style: italic; color: var(--tnx-white); animation-delay: 2.1s; }
+.tnx-hero h1 b { color: var(--tnx-white); font-weight: 500; animation-delay: 2.25s; }
+@keyframes rise { from { transform: translateY(60px); opacity: 0; filter: blur(10px); } to { transform: none; opacity: 1; filter: blur(0); } }
+@keyframes sweep { to { background-position: -250% 0; } }
+.tnx-hero-copy > *:not(h1), .tnx-hero-topline, .tnx-hero-bottom { animation: fade-up 1.2s var(--ease) 2.5s both; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+.tnx-hero-description p { font-size: 16px; color: #b8afa0; }
+.tnx-hero-description { border-left-color: var(--hair) !important; }
+
+.tnx-hero-visual { --px: 0; --py: 0; min-height: 640px; animation: fade-up 1.6s var(--ease) 2s both; }
+.tnx-visual-orbit { display: none; }
+.tnx-hero-visual::before { content: ""; position: absolute; z-index: 0; width: min(360px, 68%); height: 540px;
+  border: 1px solid var(--hair); border-radius: 999px 999px 0 0; transform: translate(calc(26px + var(--px) * -10px), calc(26px + var(--py) * -8px)); transition: transform 0.4s ease-out; }
+.tnx-hero-product { width: min(360px, 68%) !important; height: 540px !important; z-index: 2;
+  border-radius: 999px 999px 0 0; overflow: hidden; border: 1px solid var(--hair); filter: none !important; animation: none !important;
+  background: radial-gradient(80% 60% at 50% 70%, #2a2318, #0f0d0a); box-shadow: 0 50px 100px rgba(0, 0, 0, 0.6);
+  transform: translate3d(calc(var(--px) * 12px), calc(var(--py) * 10px), 0); transition: transform 0.4s ease-out; }
+.tnx-hero-product > img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); animation: breathe 10s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.07) translateY(-6px); } }
+.tnx-visual-caption, .tnx-visual-side-note { color: #b8afa0; letter-spacing: 3px; font-size: 9px; }
+.tnx-visual-caption strong { font-family: var(--serif); font-size: 26px; font-weight: 400; font-style: italic; color: var(--gold); letter-spacing: 0; }
+
+/* ---------- Buttons ---------- */
+.tnx-button-primary, .tnx-cta-circle { position: relative; overflow: hidden; transition: transform 0.5s var(--ease), background 0.4s, color 0.4s, box-shadow 0.5s; will-change: transform; }
+.tnx-button-primary { background: var(--gold); color: var(--ink); font-size: 11px !important; letter-spacing: 4px !important; font-weight: 500 !important; padding-inline: 34px; }
+.tnx-button-primary::after { content: ""; position: absolute; inset: 0; width: 40%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent); transform: translateX(-160%) skewX(-20deg); transition: transform 1s var(--ease); }
+.tnx-button-primary:hover::after { transform: translateX(340%) skewX(-20deg); }
+.tnx-button-primary:hover { box-shadow: 0 18px 60px rgba(201, 169, 110, 0.35); }
+.tnx-text-link { letter-spacing: 3px; font-size: 10px; }
+
+/* ---------- Marquee ---------- */
+.tnx-marquee { overflow: hidden; border-block: 1px solid var(--hair-soft); padding: 26px 0; position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.tnx-marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.tnx-marquee:hover .tnx-marquee-track { animation-play-state: paused; }
+.tnx-marquee-track span { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(30px, 4.4vw, 62px); padding: 0 34px; white-space: nowrap; color: #d8cfbf; display: inline-flex; align-items: center; gap: 68px; }
+.tnx-marquee-track span:nth-child(even) { color: transparent; -webkit-text-stroke: 1px rgba(216, 207, 191, 0.55); }
+.tnx-marquee-track span::after { content: "◆"; font-style: normal; color: var(--gold); font-size: 0.26em; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Reveal ---------- */
+.fx-reveal { opacity: 0; transform: translateY(56px); filter: blur(6px); transition: opacity 1.2s var(--ease), transform 1.4s var(--ease), filter 1.2s var(--ease); transition-delay: var(--d, 0ms); }
+.fx-reveal.is-in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- Manifest (ivory editorial band) ---------- */
+.tnx-manifest { background: var(--ivory) !important; color: var(--ink) !important; }
+.tnx-manifest p { font-size: clamp(40px, 5vw, 78px) !important; line-height: 1.02 !important; color: var(--ink); }
+.tnx-manifest p span { font-style: italic; color: #8a6d3b !important; }
+.tnx-manifest-label, .tnx-manifest-number { font-weight: 500 !important; letter-spacing: 4px !important; font-size: 9px !important; }
+
+/* ---------- Collections: each one its own composition ---------- */
+.tnx-collection-card { position: relative; overflow: hidden; isolation: isolate; background: transparent !important; border: 1px solid var(--hair-soft) !important; border-radius: 0;
+  transition: transform 0.8s var(--ease), border-color 0.5s, background 0.5s; }
+.tnx-collection-card strong { font-family: var(--serif); font-weight: 300 !important; font-size: clamp(34px, 3.4vw, 54px) !important; letter-spacing: 0 !important; text-transform: none; }
+.tnx-collection-card .tnx-collection-number { font-family: var(--serif); font-style: italic; font-size: 26px; font-weight: 300; color: var(--gold); letter-spacing: 0; }
+.tnx-collection-card::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity 0.6s; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(201, 169, 110, 0.18), transparent 60%); }
+.tnx-collection-card:hover::before { opacity: 1; }
+.tnx-collection-card:hover { border-color: var(--hair) !important; transform: translateY(-8px); }
+.tnx-collection-arrow { color: var(--gold) !important; transition: transform 0.7s var(--ease); }
+.tnx-collection-card:hover .tnx-collection-arrow { transform: translate(8px, -8px) scale(1.4); }
+.tnx-collection-0 { border-radius: 140px 140px 0 0 !important; }
+.tnx-collection-1 { border-radius: 0 !important; background: var(--gold-soft) !important; }
+.tnx-collection-2 { border-radius: 0 220px 0 0 !important; }
+.tnx-collection-3 { border-radius: 0 !important; border-left: 1px solid var(--gold) !important; }
+.tnx-collection-list { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important; }
+
+/* ---------- Shop heading + filters ---------- */
+.tnx-shop-count strong { font-family: var(--serif); font-weight: 300; font-size: 86px; color: var(--gold); line-height: 1; }
+.tnx-filter-list button { border-radius: 0; letter-spacing: 3px; font-size: 10px; font-weight: 500; transition: all 0.5s var(--ease); }
+.tnx-filter-list button.is-active { background: var(--gold) !important; color: var(--ink) !important; border-color: var(--gold) !important; }
+.tnx-filters { border-color: var(--hair-soft) !important; }
+
+/* ---------- PRODUCTS: every item has its own composition ---------- */
+.tnx-product-grid { display: grid !important; grid-template-columns: repeat(12, minmax(0, 1fr)) !important; gap: 110px 32px !important; align-items: start !important; }
+.tnx-product-card { background: none !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important; overflow: visible !important; transform: none !important; display: flex; flex-direction: column; min-width: 0; }
+.tnx-product-card:hover { transform: none !important; box-shadow: none !important; }
+.tnx-product-art { height: auto !important; aspect-ratio: 4 / 5; position: relative; overflow: hidden;
+  background: radial-gradient(80% 70% at 50% 65%, #2b2418, #0f0d0a 80%) !important; transition: box-shadow 0.9s var(--ease); }
+.tnx-product-art::before { display: none !important; }
+.tnx-product-art::after { background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.35)) !important; pointer-events: none; }
+.tnx-product-art > img { position: absolute; inset: 0; width: 100% !important; height: 100% !important; max-height: none !important; object-fit: cover;
+  transform: translate(calc(var(--ix, 0) * 10px), calc(var(--iy, 0) * 10px)) scale(var(--s, 1.28)); transition: transform 1.6s var(--ease); }
+.tnx-product-card.is-in { --s: 1.04; }
+.tnx-product-card.is-in:hover { --s: 1.12; }
+.tnx-product-pack { transition: transform 1.2s var(--ease); }
+.tnx-product-card:hover .tnx-product-pack { transform: translateY(-10px) scale(1.06); }
+.tnx-product-art-index { font-family: var(--serif); font-style: italic; font-size: 17px !important; letter-spacing: 1px !important; color: var(--gold) !important; z-index: 3; }
+.tnx-product-index { z-index: 3; backdrop-filter: blur(8px); letter-spacing: 3px; font-size: 8px; }
+
+.tnx-product-details { padding: 30px 0 0 !important; background: none !important; border: 0 !important; }
+.tnx-product-meta { font-size: 9px !important; letter-spacing: 4px !important; color: var(--gold) !important; }
+.tnx-product-card h3 { font-family: var(--serif) !important; font-weight: 400 !important; font-size: clamp(30px, 2.8vw, 44px) !important; line-height: 1.02 !important; letter-spacing: -0.01em !important; text-transform: none !important; margin: 14px 0 12px; }
+.tnx-product-card p { color: #a89f90; font-size: 14.5px; line-height: 1.7; max-width: 46ch; }
+.tnx-product-actions { border-top: 1px solid var(--hair-soft); padding-top: 18px; margin-top: 18px; }
+.tnx-product-actions strong { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 28px; color: var(--tnx-white); letter-spacing: 0; }
+.tnx-product-view { letter-spacing: 3px !important; font-size: 10px !important; color: var(--gold) !important; }
+.tnx-add-button { background: transparent !important; color: var(--tnx-white) !important; border: 1px solid var(--hair) !important; border-radius: 0 !important; letter-spacing: 4px !important; font-size: 10px !important; font-weight: 500 !important;
+  position: relative; overflow: hidden; transition: color 0.5s, border-color 0.5s, letter-spacing 0.6s var(--ease); z-index: 0; }
+.tnx-add-button::before { content: ""; position: absolute; inset: 0; background: var(--gold); transform: translateY(101%); transition: transform 0.7s var(--ease); z-index: -1; }
+.tnx-add-button:not(:disabled):hover { color: var(--ink) !important; border-color: var(--gold) !important; letter-spacing: 5px !important; }
+.tnx-add-button:not(:disabled):hover::before { transform: none; }
+
+/* v0 — hero feature: arch art left, text right */
+.tnx-v0 { grid-column: span 7; display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: end; }
+.tnx-v0 .tnx-product-art { border-radius: 999px 999px 0 0; aspect-ratio: 3 / 4; }
+.tnx-v0 .tnx-product-details { padding-bottom: 12px !important; }
+.tnx-v0 h3 { font-size: clamp(40px, 4vw, 64px) !important; }
+/* v1 — tall portrait, inset gold frame, pushed down */
+.tnx-v1 { grid-column: span 5; margin-top: 150px; }
+.tnx-v1 .tnx-product-art { aspect-ratio: 3 / 4.1; outline: 1px solid var(--hair); outline-offset: -16px; }
+.tnx-v1 .tnx-product-art > img { outline: none; }
+/* v2 — medallion, centered composition */
+.tnx-v2 { grid-column: span 4; text-align: center; align-items: center; }
+.tnx-v2 .tnx-product-art { aspect-ratio: 1; border-radius: 50%; width: 100%; box-shadow: 0 0 0 14px #0a0908, 0 0 0 15px var(--hair); }
+.tnx-v2 .tnx-product-meta, .tnx-v2 .tnx-product-actions { justify-content: center; gap: 24px; }
+.tnx-v2 p { margin-inline: auto; }
+.tnx-v2 .tnx-product-details { width: 100%; padding-top: 44px !important; }
+/* v3 — offset paper block */
+.tnx-v3 { grid-column: span 4; margin-top: 70px; }
+.tnx-v3 .tnx-product-art { aspect-ratio: 1 / 1.18; box-shadow: 22px 22px 0 0 rgba(201, 169, 110, 0.16); }
+/* v4 — inverted arch (rounded base) */
+.tnx-v4 { grid-column: span 4; margin-top: 20px; }
+.tnx-v4 .tnx-product-art { border-radius: 0 0 999px 999px; aspect-ratio: 3 / 4.2; }
+/* v5 — cinematic wide, text left, art right with corner frame */
+.tnx-v5 { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: center; }
+.tnx-v5 .tnx-product-details { order: 1; }
+.tnx-v5 .tnx-product-art { order: 2; aspect-ratio: 16 / 10; }
+.tnx-v5 .tnx-product-art::before { display: block !important; content: ""; position: absolute; inset: 20px; width: auto; height: auto; border: 1px solid var(--hair); border-radius: 0; transform: none; z-index: 2; pointer-events: none; }
+.tnx-v5 h3 { font-size: clamp(44px, 4.6vw, 76px) !important; }
+/* orphan handling when the last row is incomplete */
+.tnx-v0:last-child, .tnx-v2:last-child { grid-column: 1 / -1; }
+.tnx-v0:last-child { grid-template-columns: minmax(0, 480px) 1fr; gap: 72px; }
+.tnx-v3:last-child { grid-column: span 8; }
+.tnx-v2:last-child { display: grid; grid-template-columns: 0.6fr 1fr; gap: 56px; text-align: left; align-items: center; }
+.tnx-v2:last-child .tnx-product-meta, .tnx-v2:last-child .tnx-product-actions { justify-content: space-between; }
+.tnx-v2:last-child .tnx-product-art { width: min(100%, 420px); }
+
+.tnx-shop-state { font-family: var(--serif); }
+.tnx-loading-mark { font-family: var(--serif) !important; font-style: italic; font-weight: 300; color: var(--gold) !important; animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; } }
+
+/* ---------- Story / CTA ---------- */
+.tnx-story-symbol { font-family: var(--serif) !important; font-style: italic; font-weight: 300 !important; color: var(--gold) !important; font-size: 150px !important; line-height: 0.8; animation: floaty 8s ease-in-out infinite; }
+@keyframes floaty { 50% { transform: translateY(-14px); } }
+.tnx-story-copy p { font-family: var(--serif); font-size: 26px; font-weight: 300; line-height: 1.4; color: #cfc6b6; }
+.tnx-story-footer span { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(26px, 3vw, 44px); letter-spacing: 0; transition: color 0.6s; }
+.tnx-story-footer span:hover { color: var(--gold); }
+.tnx-final-cta { background: radial-gradient(60% 90% at 85% 50%, rgba(201, 169, 110, 0.18), transparent 70%), #0e0c09 !important; color: var(--tnx-white) !important; border-top: 1px solid var(--hair); position: relative; overflow: hidden; }
+.tnx-final-cta h2 { font-size: clamp(70px, 9.5vw, 150px) !important; line-height: 0.88 !important; }
+.tnx-final-cta h2 em { font-style: italic !important; color: var(--gold) !important; }
+.tnx-final-cta > div > span { color: var(--gold); letter-spacing: 5px; font-weight: 500; font-size: 10px; }
+.tnx-cta-circle { background: transparent !important; color: var(--gold) !important; border: 1px solid var(--gold) !important; width: 170px; height: 170px; letter-spacing: 4px; font-size: 10px; animation: floaty 6s ease-in-out infinite; }
+.tnx-cta-circle:hover { background: var(--gold) !important; color: var(--ink) !important; animation-play-state: paused; }
+
+/* ---------- Drawer / modals ---------- */
+.tnx-cart-backdrop { backdrop-filter: blur(10px); animation: fade 0.5s ease both; }
+.tnx-cart-drawer { background: linear-gradient(180deg, rgba(22, 18, 13, 0.94), rgba(10, 9, 8, 0.97)) !important; backdrop-filter: blur(30px); border-left: 1px solid var(--hair) !important; box-shadow: -40px 0 120px rgba(0, 0, 0, 0.7); animation: drawer 0.9s var(--ease) both; }
+.tnx-cart-drawer :is(h2, h3), .auth-modal :is(h1, h2, h3), .product-modal :is(h1, h2, h3), [class$="-modal"] :is(h1, h2, h3) { font-family: var(--serif) !important; font-weight: 400 !important; letter-spacing: -0.01em !important; text-transform: none !important; }
+.tnx-cart-item { animation: fade-up 0.8s var(--ease) both; }
+@keyframes drawer { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+[class$="-overlay"] { backdrop-filter: blur(14px) saturate(1.1); -webkit-backdrop-filter: blur(14px); animation: fade 0.5s ease both; }
+[class$="-modal"] { border-radius: 0 !important; animation: pop 0.9s var(--ease) both; box-shadow: 0 50px 140px rgba(0, 0, 0, 0.75), 0 0 0 1px var(--hair); }
+@keyframes pop { from { opacity: 0; transform: translateY(44px) scale(0.96); } to { opacity: 1; transform: none; } }
+
+/* ---------- Footer ---------- */
+.tnx-footer { border-top: 1px solid var(--hair-soft); }
+.tnx-footer-logo { font-family: var(--serif) !important; font-weight: 300 !important; font-size: clamp(60px, 13vw, 210px) !important; letter-spacing: 0.12em !important; line-height: 0.9;
+  background: linear-gradient(180deg, #f1ebe0 10%, rgba(241, 235, 224, 0.03)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tnx-footer-logo span { -webkit-text-fill-color: var(--gold); }
+.tnx-footer-links a { display: inline-block; letter-spacing: 3px; font-size: 10px; transition: color 0.4s, transform 0.6s var(--ease); }
+.tnx-footer-links a:hover { color: var(--gold); transform: translateX(8px); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .tnx-product-grid { grid-template-columns: 1fr !important; gap: 80px !important; }
+  .tnx-product-card { grid-column: 1 / -1 !important; margin-top: 0 !important; display: flex !important; flex-direction: column !important; text-align: left !important; }
+  .tnx-v2 { text-align: center !important; }
+  .tnx-product-card .tnx-product-art { width: min(100%, 460px); }
+  .tnx-v5 .tnx-product-art { width: 100%; aspect-ratio: 4 / 3; }
+  .tnx-v5 .tnx-product-details { order: 2; }
+  .tnx-v5 .tnx-product-art { order: 1; }
+  .tnx-hero-product, .tnx-hero-visual::before { height: 440px !important; }
+  .tnx-hero-visual { min-height: 520px; }
+  .tnx-cursor { display: none; }
+}
+@media (hover: none) { .tnx-cursor { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .tnx-preloader, .tnx-cursor, .tnx-app::before { display: none !important; }
+  .fx-reveal { opacity: 1; transform: none; filter: none; }
+  .tnx-hero h1 span, .tnx-hero h1 em, .tnx-hero h1 b { animation: none; }
+}
+
+/* ---------- SVG packshots (products without a photo) ---------- */
+.tnx-pack3d { width: 58%; max-width: 300px; position: relative; z-index: 1; transition: transform 1.2s var(--ease); filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.55)); }
+.tnx-pack3d svg { display: block; width: 100%; height: auto; overflow: visible; }
+.tnx-product-card:hover .tnx-pack3d { transform: translateY(-10px) scale(1.05); }
+.tnx-pack-hero { width: 78%; animation: floaty 7s ease-in-out infinite; }
+.tnx-pack-modal { width: 52%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.tnx-v2 .tnx-pack3d { width: 50%; }
+.tnx-v5 .tnx-pack3d { width: 30%; }
+.tnx-v0 .tnx-pack3d { width: 62%; }
+.tnx-pack3d { width: 74%; max-width: 360px; }
+.tnx-v0 .tnx-pack3d { width: 74%; }
+.tnx-v2 .tnx-pack3d { width: 62%; }
+.tnx-v5 .tnx-pack3d { width: 36%; max-width: 330px; }
+.tnx-pack-hero { width: 84%; }
+.tnx-v0 { align-self: center; }
+
+/* =========================================
+   TRENIX - TYPOGRAPHY AND CATEGORY FIXES
+   ========================================= */
+
+/* 1. HERO: prevent descenders such as "g" from being clipped */
+.tnx-hero h1 {
+  line-height: 1.05 !important;
+  padding-bottom: 0.14em;
+  overflow: visible !important;
+}
+
+.tnx-hero h1 span,
+.tnx-hero h1 em,
+.tnx-hero h1 b {
+  line-height: 1.15 !important;
+  padding-bottom: 0.09em;
+  overflow: visible !important;
+}
+
+/* 2. COLLECTIONS: fit long category names */
+.tnx-collection-card {
+  min-width: 0;
+}
+
+.tnx-collection-card strong {
+  display: block;
+  width: 100%;
+  max-width: 100% !important;
+  padding-right: 0;
+  font-size: clamp(27px, 2vw, 34px) !important;
+  line-height: 1.08 !important;
+  white-space: nowrap;
+  overflow: visible;
+  letter-spacing: -0.02em !important;
+}
+
+/* Move the arrow away from the category name */
+.tnx-collection-arrow {
+  top: 19px;
+  right: 21px;
+  bottom: auto;
+  z-index: 3;
+}
+
+/* Tablet */
+@media (max-width: 1000px) {
+  .tnx-collection-card strong {
+    font-size: clamp(29px, 4vw, 40px) !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 650px) {
+  .tnx-collection-card strong {
+    font-size: clamp(29px, 7vw, 38px) !important;
+    white-space: normal;
+  }
+}
+/* Remove custom gold cursor */
+.tnx-cursor {
+  display: none !important;
+}
