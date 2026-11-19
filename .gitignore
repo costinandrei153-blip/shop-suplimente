@@ -30,3 +30,9 @@ Thumbs.db
 
 # Backup files
 **/*.backup-*
+
+# PostgreSQL backups
+*.dump
+
+# Local PostgreSQL schema export
+**/trenix_schema.sql
